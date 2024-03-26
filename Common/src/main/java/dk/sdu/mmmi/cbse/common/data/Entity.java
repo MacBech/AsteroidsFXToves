@@ -12,8 +12,9 @@ public class Entity implements Serializable {
     private double y;
     private double rotation;
     private float radius;
+
+    private String color;
             
-//Init1
 
     public String getID() {
         return ID.toString();
@@ -26,6 +27,14 @@ public class Entity implements Serializable {
 
     public double[] getPolygonCoordinates() {
         return polygonCoordinates;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
     }
        
 

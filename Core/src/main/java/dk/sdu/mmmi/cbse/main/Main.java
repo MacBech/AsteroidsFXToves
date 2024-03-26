@@ -17,6 +17,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -130,6 +131,12 @@ public class Main extends Application {
             polygon.setTranslateX(entity.getX());
             polygon.setTranslateY(entity.getY());
             polygon.setRotate(entity.getRotation());
+
+            //Default Black
+            if (entity.getColor() == null) {
+                entity.setColor("BLACK");
+            }
+            polygon.setFill(Color.valueOf(entity.getColor()));
         }
 
     }
