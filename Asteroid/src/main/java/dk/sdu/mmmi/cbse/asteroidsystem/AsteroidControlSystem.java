@@ -14,30 +14,26 @@ public class AsteroidControlSystem implements IEntityProcessingService {
 
         for (Entity asteroid : world.getEntities(Asteroid.class)) {
 
-            {
-                double changeX = Math.cos(Math.toRadians(asteroid.getRotation()));
-                double changeY = Math.sin(Math.toRadians(asteroid.getRotation()));
 
-                asteroid.setX(asteroid.getX() + changeX * 0.5);
-                asteroid.setY(asteroid.getY() + changeY * 0.5);
+            // Movement
+            double changeX = Math.cos(Math.toRadians(asteroid.getRotation()));
+            double changeY = Math.sin(Math.toRadians(asteroid.getRotation()));
+//            double dX = Math.cos(Math.toRadians(asteroid.getRotation())) * ((Asteroid) asteroid).getSpeed();
 
-                if (asteroid.getX() < 0) {
-                    asteroid.setX(asteroid.getX() - gameData.getDisplayWidth());
-                }
+            asteroid.setX(asteroid.getX() + changeX * 0.5);
+            asteroid.setY(asteroid.getY() + changeY * 0.5);
 
-                if (asteroid.getX() > gameData.getDisplayWidth()) {
-                    asteroid.setX(asteroid.getX() % gameData.getDisplayWidth());
-                }
+            // Screen boundary check
 
-                if (asteroid.getY() < 0) {
-                    asteroid.setY(asteroid.getY() - gameData.getDisplayHeight());
-                }
 
-                if (asteroid.getY() > gameData.getDisplayHeight()) {
-                    asteroid.setY(asteroid.getY() % gameData.getDisplayHeight());
-                }
 
-            }
+
+            // Asteroid spawner
+
+
+
+
+
         }
 
     }
