@@ -98,6 +98,10 @@ public class Main extends Application {
                 update();
                 draw();
                 gameData.getKeys().update();
+//            Just a test
+//                if (Math.random() < 0.02) {
+//                System.out.println("ENEMY SPOTTED");
+//            }
             }
 
         }.start();
