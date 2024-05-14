@@ -41,9 +41,11 @@ public class AsteroidControlSystem implements IEntityProcessingService {
             if (asteroid.getY() > gameData.getDisplayHeight()) {
                 asteroid.setRotation(asteroid.getRotation() - 180 + new Random().nextInt(60));
             }
-            
 
-            // Asteroid spawner
+
+            // Asteroid spawner - optional
+
+
 
 
         }

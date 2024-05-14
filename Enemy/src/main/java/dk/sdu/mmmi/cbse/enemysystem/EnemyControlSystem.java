@@ -45,7 +45,7 @@ public class EnemyControlSystem implements IEntityProcessingService {
                 for (BulletSPI bulletSPI : getBulletSPIs()) {
                     Entity bullet = bulletSPI.createBullet(enemy, gameData);
                     bullet.setColor("RED");
-                    world.addEntity(bullet);
+//                    world.addEntity(bullet);
 
                 }
             }

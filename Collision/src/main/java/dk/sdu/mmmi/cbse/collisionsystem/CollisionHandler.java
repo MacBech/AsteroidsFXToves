@@ -1,5 +1,8 @@
 package dk.sdu.mmmi.cbse.collisionsystem;
 
+import dk.sdu.mmmi.cbse.asteroid.Asteroid;
+import dk.sdu.mmmi.cbse.asteroid.IAsteroidSplit;
+import dk.sdu.mmmi.cbse.asteroidsystem.AsteroidSplitter;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -7,6 +10,7 @@ import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 
 public class CollisionHandler implements IPostEntityProcessingService {
 
+    private IAsteroidSplit asteroidSplit = new AsteroidSplitter();
 
     @Override
     public void process(GameData gameData, World world) {
@@ -17,15 +21,27 @@ public class CollisionHandler implements IPostEntityProcessingService {
                 if (entity1.equals(entity2)) {
                     continue;
                 }
-//                if (entity1.getID() == entity2.getID()) {
-//                    continue;
-//                }
+
 
                 if (this.collision(entity1, entity2)) {
 
-                    world.removeEntity(entity1);
-                    world.removeEntity(entity2);
+                    if (entity2 instanceof Asteroid) {
+                        asteroidSplit.createAsteroidSplit(world, entity2);
+                    } else {
+                        world.removeEntity(entity2);
+                    }
+
+
+                    if (entity1 instanceof Asteroid) {
+                        asteroidSplit.createAsteroidSplit(world, entity1);
+                    } else {
+                        world.removeEntity(entity1);
+                    }
+
+
                 }
+
+                // TODO: Asteroid detection split
 
 
             }
