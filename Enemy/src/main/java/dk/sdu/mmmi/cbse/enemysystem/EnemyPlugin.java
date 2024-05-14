@@ -14,6 +14,12 @@ public class EnemyPlugin implements IGamePluginService {
 
         enemy = createEnemy(gameData);
         world.addEntity(enemy);
+
+        if (world.getEntities(Enemy.class).stream()
+                .count() > 1) {
+            world.addEntity(createEnemy(gameData));
+
+        }
     }
 
     public Entity createEnemy(GameData gameData) {

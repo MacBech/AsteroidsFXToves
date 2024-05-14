@@ -15,21 +15,31 @@ import java.util.ServiceLoader;
 public class EnemyControlSystem implements IEntityProcessingService {
 
     private final Random random = new Random();
+    private double speed = 0.6;
 
     @Override
     public void process(GameData gameData, World world) {
-
-        // Movement
-
-
-        // Border check
 
 
         for (Entity enemy : world.getEntities(Entity.class)) {
 
 
-            // Shooting
+            // Movement
 
+            if (Math.random() > 0.5) {
+                enemy.setRotation(enemy.getRotation() + 4 + random.nextInt(2));
+            } else {
+                enemy.setRotation(enemy.getRotation() - 4 + random.nextInt(2));
+            }
+
+            // Keeps moving forward
+            double changeX = speed * Math.cos(Math.toRadians(enemy.getRotation()));
+            double changeY = speed * Math.sin(Math.toRadians(enemy.getRotation()));
+            enemy.setX(enemy.getX() + changeX);
+            enemy.setY(enemy.getY() + changeY);
+
+
+            // Random shooting
             if (Math.random() > 0.96) {
 
                 for (BulletSPI bulletSPI : getBulletSPIs()) {
@@ -40,9 +50,11 @@ public class EnemyControlSystem implements IEntityProcessingService {
                 }
             }
 
+            // Border check
+
+
 
         }
-
 
     }
 
