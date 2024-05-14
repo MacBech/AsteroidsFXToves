@@ -45,6 +45,15 @@ public class PlayerControlSystem implements IEntityProcessingService {
                         spi -> {world.addEntity(spi.createBullet(player, gameData));}
                 );
             }
+
+            // Boost or utility/test button
+            if(gameData.getKeys().isDown(GameKeys.X)) {
+                double changeX = 2*Math.cos(Math.toRadians(player.getRotation()));
+                double changeY = 2*Math.sin(Math.toRadians(player.getRotation()));
+                player.setX(player.getX() + changeX);
+                player.setY(player.getY() + changeY);
+            }
+
             
         if (player.getX() < 0) {
             player.setX(1);

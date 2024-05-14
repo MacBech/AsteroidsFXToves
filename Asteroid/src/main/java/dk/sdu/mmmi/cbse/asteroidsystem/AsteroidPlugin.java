@@ -38,7 +38,7 @@ public class AsteroidPlugin implements IGamePluginService {
 
         System.out.println("Created Asteroid!");
         Entity asteroid = new Asteroid();
-        asteroid.setColor("DARKSLATEGRAY");
+        asteroid.setColor("DARKGREY");
 
         // Sets random size of asteroids
         Random random = new Random();
