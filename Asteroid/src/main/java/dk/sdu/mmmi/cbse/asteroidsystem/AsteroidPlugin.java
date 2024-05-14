@@ -56,7 +56,7 @@ public class AsteroidPlugin implements IGamePluginService {
                 4 * scale, 16 * scale
         );
 
-        asteroid.setRadius(30);
+        asteroid.setRadius((float) (6 * scale));
 
 
         // Setting random spawn location, bound by display

@@ -54,6 +54,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 double changeY = 2 * Math.sin(Math.toRadians(player.getRotation()));
                 player.setX(player.getX() + changeX);
                 player.setY(player.getY() + changeY);
+                player.setPolygonCoordinates(-6,-6,12,-1,-6,6);
+                player.setColor("BLUE");
             }
 
 
@@ -73,6 +75,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 player.setY(gameData.getDisplayHeight() - 1);
             }
 
+
+//            player.setPolygonCoordinates(-5,-5,10,0,-5,5);
+//            player.setColor("ROYALBLUE");
 
         }
     }

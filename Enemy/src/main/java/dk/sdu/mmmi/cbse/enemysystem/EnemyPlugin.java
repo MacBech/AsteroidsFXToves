@@ -30,6 +30,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemyShip.setColor("RED");
         enemyShip.setX(200);
         enemyShip.setY(200);
+        enemyShip.setRadius(8);
 
 
         return enemyShip;
