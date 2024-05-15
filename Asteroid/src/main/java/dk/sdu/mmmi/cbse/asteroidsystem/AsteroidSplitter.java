@@ -16,8 +16,8 @@ public class AsteroidSplitter implements IAsteroidSplit {
         // Removing original asteroid
         System.out.println("Asteroid splitting");
 
-        Entity asteroid1 = new Asteroid();
-        Entity asteroid2 = new Asteroid();
+        Asteroid asteroid1 = new Asteroid();
+        Asteroid asteroid2 = new Asteroid();
 
         double scale = 0.6;
 
@@ -34,24 +34,30 @@ public class AsteroidSplitter implements IAsteroidSplit {
         );
         asteroid2.setPolygonCoordinates(asteroid1.getPolygonCoordinates());
 
-        asteroid1.setRotation(entity.getRotation()+new Random().nextInt(120,180));
-        asteroid2.setRotation(entity.getRotation()-new Random().nextInt(30,90));
+        asteroid1.setRadius((float) (scale * 5));
+        asteroid2.setRadius((float) (scale * 5));
+
+        asteroid1.setRotation(entity.getRotation() + new Random().nextInt(120, 180));
+        asteroid2.setRotation(entity.getRotation() - new Random().nextInt(30, 90));
         System.out.println(asteroid1.getRotation());
         System.out.println(asteroid2.getRotation());
 
-        asteroid1.setX(entity.getX()+Math.cos(Math.toRadians(entity.getRotation())));
-        asteroid1.setY(entity.getY()+Math.sin(Math.toRadians(entity.getRotation())));
+        asteroid1.setX(entity.getX() + Math.cos(Math.toRadians(entity.getRotation())));
+        asteroid1.setY(entity.getY() + Math.sin(Math.toRadians(entity.getRotation())));
 
-        asteroid2.setX(entity.getX()+Math.cos(Math.toRadians(entity.getRotation()))*3);
-        asteroid2.setY(entity.getY()+Math.sin(Math.toRadians(entity.getRotation()))*3);
+        asteroid2.setX(entity.getX() + Math.cos(Math.toRadians(entity.getRotation())) * 3);
+        asteroid2.setY(entity.getY() + Math.sin(Math.toRadians(entity.getRotation())) * 3);
 
         asteroid1.setColor("GREY");
         asteroid2.setColor("GREY");
 
+        asteroid1.setHP(1);
+        asteroid2.setHP(1);
+
         world.addEntity(asteroid1);
         world.addEntity(asteroid2);
 
-        world.removeEntity(entity);
+//        world.removeEntity(entity);
 
     }
 

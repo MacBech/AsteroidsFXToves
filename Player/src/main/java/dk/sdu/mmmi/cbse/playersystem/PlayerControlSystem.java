@@ -20,6 +20,10 @@ public class PlayerControlSystem implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
 
         for (Entity player : world.getEntities(Player.class)) {
+
+            player.setPolygonCoordinates(-5, -5, 10, 0, -5, 5);
+            player.setColor("ROYALBLUE");
+
             if (gameData.getKeys().isDown(GameKeys.LEFT)) {
                 player.setRotation(player.getRotation() - 5);
             }
@@ -55,8 +59,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 player.setX(player.getX() + changeX);
                 player.setY(player.getY() + changeY);
 
-                player.setPolygonCoordinates(-6,-6,12,-1,-6,6);
-                player.setColor("BLUE");
+                player.setPolygonCoordinates(-7, -7, 13, -2, -7, 7);
+                player.setColor("POWDERBLUE");
             }
 
 
@@ -76,9 +80,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 player.setY(gameData.getDisplayHeight() - 1);
             }
 
-
-//            player.setPolygonCoordinates(-5,-5,10,0,-5,5);
-//            player.setColor("ROYALBLUE");
 
         }
     }

@@ -36,13 +36,13 @@ public class AsteroidPlugin implements IGamePluginService {
 
     public Entity createAsteroid(GameData gameData) {
 
-        System.out.println("Created Asteroid!");
         Entity asteroid = new Asteroid();
         asteroid.setColor("DARKGREY");
 
         // Sets random size of asteroids
         Random random = new Random();
         double scale = random.nextInt(1, 3);
+
         asteroid.setPolygonCoordinates(
                 0 * scale, 6 * scale,
                 4 * scale, 0 * scale,
@@ -56,7 +56,7 @@ public class AsteroidPlugin implements IGamePluginService {
                 4 * scale, 16 * scale
         );
 
-        asteroid.setRadius((float) (6 * scale));
+        asteroid.setRadius((float) (12 * scale));
 
 
         // Setting random spawn location, bound by display

@@ -15,35 +15,36 @@ public class CollisionHandler implements IPostEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
 
+        // Double loop, to check all entities against each other
         for (Entity entity1 : world.getEntities()) {
             for (Entity entity2 : world.getEntities()) {
 
-                if (entity1.equals(entity2)) {
+                if (entity1.getID().equals(entity2.getID())) {
                     continue;
+                    // Doesn't have to check for collision on itself
                 }
 
 
+                // Main collision system
                 if (this.collision(entity1, entity2)) {
 
-                    if (entity2 instanceof Asteroid) {
+                    // Asteroids do not collide with each other
+                    if (entity1 instanceof Asteroid && entity2 instanceof Asteroid) {
+                        continue;
+                    }
+
+                    // Finds asteroids with high HP for split on collision
+                    if (entity2 instanceof Asteroid && ((Asteroid) entity2).getHP() > 1) {
                         asteroidSplit.createAsteroidSplit(world, entity2);
-                    } else {
-                        world.removeEntity(entity2);
+                    } else if (entity1 instanceof Asteroid && ((Asteroid) entity1).getHP() > 1) {
+                        asteroidSplit.createAsteroidSplit(world, entity2);
                     }
 
-
-                    if (entity1 instanceof Asteroid) {
-                        asteroidSplit.createAsteroidSplit(world, entity1);
-                    } else {
-                        world.removeEntity(entity1);
-                    }
-
+                    // Removes colliding entities
+                    world.removeEntity(entity2);
+                    world.removeEntity(entity1);
 
                 }
-
-                // TODO: Asteroid detection split
-
-
             }
         }
 
@@ -56,7 +57,5 @@ public class CollisionHandler implements IPostEntityProcessingService {
 
         return distance < entity1.getRadius() + entity2.getRadius();
 
-
     }
-
 }
