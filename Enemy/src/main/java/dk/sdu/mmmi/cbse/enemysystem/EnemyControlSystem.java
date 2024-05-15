@@ -40,12 +40,12 @@ public class EnemyControlSystem implements IEntityProcessingService {
 
 
             // Random shooting
-            if (Math.random() > 0.96) {
+            if (Math.random() > 0.98) {
 
                 for (BulletSPI bulletSPI : getBulletSPIs()) {
                     Entity bullet = bulletSPI.createBullet(enemy, gameData);
                     bullet.setColor("RED");
-//                    world.addEntity(bullet);
+                    world.addEntity(bullet);
 
                 }
             }
