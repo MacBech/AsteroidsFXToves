@@ -16,8 +16,15 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Game {
@@ -31,6 +38,7 @@ public class Game {
     private final List<IEntityProcessingService> entityProcessingServices;
     private final List<IPostEntityProcessingService> postEntityProcessingServices;
 
+    private final Text scoreText = new Text("Score: 0");
 
     public Game(List<IGamePluginService> gamePluginServices, List<IEntityProcessingService> entityProcessingServices, List<IPostEntityProcessingService> postEntityProcessingServices) {
         this.gamePluginServices = gamePluginServices;
@@ -40,9 +48,12 @@ public class Game {
 
 
     public void start(Stage window) throws Exception {
-        Text text = new Text(10, 20, "Destroyed asteroids: 0");
+
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
-        gameWindow.getChildren().add(text);
+        gameWindow.getChildren().add(scoreText);
+
+        // Updates score every second
+        timer.scheduleAtFixedRate(updateScoreTask, 0, 1000);
 
         Scene scene = new Scene(gameWindow);
         scene.setOnKeyPressed(event -> {
@@ -151,6 +162,35 @@ public class Game {
         }
 
     }
+
+    // MicroService timers for updating score / scoreText
+    Timer timer = new Timer();
+    TimerTask updateScoreTask = new TimerTask() {
+
+        @Override
+        public void run() {
+            updateScoreText();
+        }
+    };
+
+
+    private void updateScoreText() {
+
+        System.out.println("Update score text task running...");
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/score"))
+                .GET().build();
+
+        try {
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            scoreText.setText("Score: " + response.body());
+        } catch (IOException | InterruptedException exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
 
     public List<IGamePluginService> getPluginServices() {
         return gamePluginServices;
