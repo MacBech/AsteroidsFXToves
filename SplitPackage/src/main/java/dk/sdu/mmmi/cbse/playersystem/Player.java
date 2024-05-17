@@ -7,7 +7,7 @@ import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 public class Player implements IGamePluginService {
     @Override
     public void start(GameData gameData, World world) {
-        System.out.println("Split package says hi!");
+        System.out.println("\u001B[36m" +"\u001B[40m"+ "Split package says hi!" + "\u001B[0m");
     }
 
     @Override
