@@ -13,8 +13,6 @@ public class AsteroidSplitter implements IAsteroidSplit {
     @Override
     public void createAsteroidSplit(World world, Entity entity) {
 
-        // Removing original asteroid
-        System.out.println("Asteroid splitting");
 
         Asteroid asteroid1 = new Asteroid();
         Asteroid asteroid2 = new Asteroid();
@@ -57,9 +55,6 @@ public class AsteroidSplitter implements IAsteroidSplit {
         world.addEntity(asteroid1);
         world.addEntity(asteroid2);
 
-//        world.removeEntity(entity);
 
     }
-
-
 }

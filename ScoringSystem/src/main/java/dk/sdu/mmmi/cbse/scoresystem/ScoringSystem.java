@@ -26,9 +26,10 @@ public class ScoringSystem {
         return totalScore;
     }
 
-    @PutMapping("score/update/{score}")
-    public float updateScore(@PathVariable(value = "amount") int amount) {
+    @GetMapping("/update")
+    public float updateScore(@RequestParam(value = "amount") float amount) {
         totalScore += amount;
+        System.out.println(totalScore);
         return totalScore;
     }
 

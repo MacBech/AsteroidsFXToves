@@ -8,12 +8,21 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 public class CollisionHandler implements IPostEntityProcessingService {
 
     private IAsteroidSplit asteroidSplit = new AsteroidSplitter();
 
+
     @Override
     public void process(GameData gameData, World world) {
+
+        int amount = 0;
 
         // Double loop, to check all entities against each other
         for (Entity entity1 : world.getEntities()) {
@@ -44,10 +53,27 @@ public class CollisionHandler implements IPostEntityProcessingService {
                     world.removeEntity(entity2);
                     world.removeEntity(entity1);
 
+
+                    // Microservice
+                    amount++;
+                    System.out.println(amount);
+
+                    String url = String.format("http://localhost:8080/update?amount=%d", amount);
+                    HttpClient client = HttpClient.newHttpClient();
+                    HttpRequest request = HttpRequest.newBuilder()
+                            .uri(URI.create(url))
+                            .build();
+                    try {
+//                            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+//                            System.out.println(response.body());
+                        client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+                    } catch (Exception e) {
+                        System.out.println("Couldn't update score");
+
+                    }
                 }
             }
         }
-
     }
 
     public boolean collision(Entity entity1, Entity entity2) {

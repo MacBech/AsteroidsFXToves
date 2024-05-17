@@ -50,6 +50,8 @@ public class Game {
     public void start(Stage window) throws Exception {
 
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
+        scoreText.setLayoutX(32);
+        scoreText.setLayoutY(32);
         gameWindow.getChildren().add(scoreText);
 
         // Updates score every second
@@ -185,6 +187,8 @@ public class Game {
         try {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
             scoreText.setText("Score: " + response.body());
+
+            System.out.println(response.body());
         } catch (IOException | InterruptedException exception) {
             exception.printStackTrace();
         }
