@@ -59,6 +59,10 @@ public class Main extends Application {
             if (event.getCode().equals(KeyCode.X)) {
                 gameData.getKeys().setKey(GameKeys.X, true);
             }
+            if (event.getCode().equals(KeyCode.ESCAPE)) {
+                System.exit(0);
+            }
+
         });
         scene.setOnKeyReleased(event -> {
             if (event.getCode().equals(KeyCode.LEFT)) {
