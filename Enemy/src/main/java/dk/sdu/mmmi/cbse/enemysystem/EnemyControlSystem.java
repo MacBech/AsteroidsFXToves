@@ -14,9 +14,6 @@ import java.util.ServiceLoader;
 
 public class EnemyControlSystem implements IEntityProcessingService {
 
-    private final Random random = new Random();
-    private double speed = 0.6;
-
     @Override
     public void process(GameData gameData, World world) {
 
@@ -27,12 +24,13 @@ public class EnemyControlSystem implements IEntityProcessingService {
             // Movement
 
             if (Math.random() > 0.5) {
-                enemy.setRotation(enemy.getRotation() + 4 + random.nextInt(2));
+                enemy.setRotation(enemy.getRotation() + 4 + new Random().nextInt(2));
             } else {
-                enemy.setRotation(enemy.getRotation() - 4 + random.nextInt(2));
+                enemy.setRotation(enemy.getRotation() - 4 + new Random().nextInt(2));
             }
 
             // Keeps moving forward
+            double speed = 0.6;
             double changeX = speed * Math.cos(Math.toRadians(enemy.getRotation()));
             double changeY = speed * Math.sin(Math.toRadians(enemy.getRotation()));
             enemy.setX(enemy.getX() + changeX);

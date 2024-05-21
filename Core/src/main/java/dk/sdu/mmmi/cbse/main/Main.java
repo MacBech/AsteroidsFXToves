@@ -152,7 +152,6 @@ public class Main extends Application {
             }
             polygon.setFill(Color.valueOf(entity.getColor()));
         }
-
     }
 
     private Collection<? extends IGamePluginService> getPluginServices() {
