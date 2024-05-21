@@ -20,7 +20,6 @@ public class AsteroidControlSystem implements IEntityProcessingService {
             // Movement
             double changeX = Math.cos(Math.toRadians(asteroid.getRotation()));
             double changeY = Math.sin(Math.toRadians(asteroid.getRotation()));
-//            double dX = Math.cos(Math.toRadians(asteroid.getRotation())) * ((Asteroid) asteroid).getSpeed()
 
             asteroid.setX(asteroid.getX() + changeX * 0.6);
             asteroid.setY(asteroid.getY() + changeY * 0.6);

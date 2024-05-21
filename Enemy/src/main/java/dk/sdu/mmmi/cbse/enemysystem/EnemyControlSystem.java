@@ -25,7 +25,6 @@ public class EnemyControlSystem implements IEntityProcessingService {
 
 
             // Movement
-
             if (Math.random() > 0.5) {
                 enemy.setRotation(enemy.getRotation() + 4 + random.nextInt(2));
             } else {
@@ -38,7 +37,6 @@ public class EnemyControlSystem implements IEntityProcessingService {
             enemy.setX(enemy.getX() + changeX);
             enemy.setY(enemy.getY() + changeY);
 
-
             // Random shooting
             if (Math.random() > 0.98) {
 
@@ -46,7 +44,6 @@ public class EnemyControlSystem implements IEntityProcessingService {
                     Entity bullet = bulletSPI.createBullet(enemy, gameData);
                     bullet.setColor("RED");
                     world.addEntity(bullet);
-
                 }
             }
 
